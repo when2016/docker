@@ -17,7 +17,3 @@ Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-MariaDB [(none)]> show databases;
-ERROR 2006 (HY000): MySQL server has gone away
-No connection. Trying to reconnect...
-ERROR 2003 (HY000): Can't connect to MySQL server on '188.131.169.24' (10051 "Unknown error")
