@@ -1,0 +1,36 @@
+#docker下直接使用MariaDB镜像安装mariadb数据库
+#参考https://www.jianshu.com/p/7028681d7f0f
+
+##1.docker search mariadb
+[root@VM_0_6_centos ~]# docker search mariadb
+INDEX       NAME                                             DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+docker.io   docker.io/mariadb                                MariaDB is a community-developed fork of M...   2850      [OK]
+docker.io   docker.io/bitnami/mariadb                        Bitnami MariaDB Docker Image                    98                   [OK]
+##2.拉取 mariadb 镜像 docker pull mariadb
+##3.配置数据库文件路径
+[root@VM_0_6_centos ~]# mkdir -p /data/mysql
+
+##4.修改对象（文件）的安全上下文。比如：用户：角色：类型：安全级别(此处会有人采坑)https://www.linuxidc.com/Linux/2012-09/70199.htm
+[root@VM_0_6_centos ~]# chcon -Rt svirt_sandbox_file_t /data/mysql
+chcon: can't apply partial context to unlabeled file ‘/data/mysql’
+
+[root@VM_0_6_centos ~]# cat /etc/selinux/config
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=disabled------------------------------------->enforcing
+# SELINUXTYPE= can take one of three two values:
+#     targeted - Targeted processes are protected,
+#     minimum - Modification of targeted policy. Only selected processes are protected.
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+
+##5.启动镜像
+docker run -v /data/mysql/:/var/lib/mysql -p 13306:3306 -e MYSQL_ROOT_PASSWORD=123456  --privileged=true --restart unless-stopped  --name mariadb -d mariadb:latest
+
+##6.查看容器
+docker ps
+
+docker update --restart=no my-container
