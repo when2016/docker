@@ -1,0 +1,8 @@
+
+##1.拉取nginx镜像
+docker pull docker.io/nginx
+##2.启动镜像
+docker run --name nginx-test -p 80:80 -d nginx
+
+##3.
+docker run -t -d -i --restart=always --name=nginx -v /config/nginx:/etc/nginx/conf.d -v /data/nginx:/usr/share/nginx/html -p 80:80 nginx:latest
