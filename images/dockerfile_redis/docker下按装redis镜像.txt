@@ -1,0 +1,8 @@
+
+
+[root@VM_0_6_centos ~]# docker search redis
+[root@VM_0_6_centos ~]# docker pull redis
+[root@VM_0_6_centos ~]# docker run -t -d -i --restart=always --name=redis -v /data/redis:/data -p 16379:6379 redis:latest
+90a17dc4a60ba2661349d452282ff07133826e60c93cf6519a52a37751c59f27
+
+PS C:\Users\whe> redis-cli -h 188.131.169.24 -p 16379
