@@ -5,6 +5,7 @@ PS C:\Users\whe> redis-cli -h 188.131.169.24 -p 16379
 
 netstat -anlpt|grep 8080
 
+yum install mysql-community-client
 
 
 
