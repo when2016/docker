@@ -3,6 +3,8 @@
 https://www.cnblogs.com/lemon-le/p/9914820.html
 https://www.jianshu.com/p/ac87ae10f03f
 
+https://www.cnblogs.com/lemon-le/p/9914820.html
+https://www.jianshu.com/p/ac87ae10f03f
 
 ###1.创建RC
 kubectl create -f tomcat-rc.yaml

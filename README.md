@@ -3,7 +3,7 @@ PS C:\Users\whe> mysql -uroot -h 188.131.169.24 --port=13306 -p
 PS C:\Users\whe> redis-cli -h 188.131.169.24 -p 16379
 
 
-
+netstat -anlpt|grep 8080
 
 
 
