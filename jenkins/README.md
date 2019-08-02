@@ -21,6 +21,7 @@ docker run --name jenkins -p 8080:8080 -p 50000:50000 \
     -d auto-jenkins
 7.通过ip:port访问jenkins
 http://47.104.91.236:8080/
+http://jenkins.test.longmao.tech
 8.查看登录密码
 cat /var/jenkins_home/secrets/initialAdminPassword
 
@@ -30,3 +31,8 @@ cat /var/jenkins_home/secrets/initialAdminPassword
 java -jar -Dserver.port=18080 longmao-server-task-1.0.jar --spring.profiles.active=test
 
 nohup java -jar -Dserver.port=18080 longmao-server-task-1.0.jar --spring.profiles.active=test > nohup.out &
+
+[root@l-maven-server1 conf.d]# sudo /usr/sbin/nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+[root@l-maven-server1 conf.d]# sudo /usr/sbin/nginx -s reload
