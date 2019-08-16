@@ -6,3 +6,6 @@
 90a17dc4a60ba2661349d452282ff07133826e60c93cf6519a52a37751c59f27
 
 PS C:\Users\whe> redis-cli -h 188.131.169.24 -p 16379
+
+
+redis-cli -h 39.105.121.53 -p 6379 -a zkEtLQfL8k4K
