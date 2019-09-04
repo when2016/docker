@@ -1,0 +1,64 @@
+# mkdir -p /workspaces/docker/mysql/data
+# mkdir -p /workspaces/docker/mysql/logs
+# mkdir -p /workspaces/docker/mysql/dump
+# mkdir -p /workspaces/docker/mysql/conf
+# mkdir -p /workspaces/docker/redis/data
+# mkdir -p /workspaces/docker/redis/log
+# mkdir -p /workspaces/docker/fastdfs/conf
+# mkdir -p /workspaces/docker/fastdfs/storage
+version: '3'
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    restart:
+      always
+    volumes:
+      - /workspaces/docker/mysql/data:/var/lib/mysql
+      - /workspaces/docker/mysql/logs:/logs
+      - /workspaces/docker/mysql/dump:/workspaces/mysql/dump
+      - /workspaces/docker/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=Passw0rd123
+    command: --lower_case_table_names=1
+  redis:
+    container_name: redis
+    image: cyourai/redis:latest
+    ports:
+      - "6379:6379"
+    restart:
+      always
+    volumes:
+      - /workspaces/docker/redis/data:/data
+      - /workspaces/docker/redis/log:/log
+  fastdfs:
+    container_name: fastdfs
+    image: cyourai/fastdfs
+    ports:
+      - "22122:22122"
+      - "23000:23000"
+      - "9090:9090"
+      - "80:80"
+      - "443:443"
+    restart: always
+    privileged: true
+    environment:
+      - TRACKER_IP=39.97.242.205
+    volumes:
+      - /workspaces/docker/fastdfs:/home/fastdfs                # 宿主机保存日志
+      - /workspaces/docker/fastdfs/storage:/home/fdfs_storage   # 宿主机保存文件
+      - /workspaces/docker/fastdfs/conf:/etc/fdfs               # 宿主机保存配置  文件
+    networks:
+      macnet:
+        ipv4_address: 39.97.242.205
+
+networks:
+  macnet:
+    driver: bridge
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: 39.97.242.1/24
